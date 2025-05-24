@@ -1,0 +1,45 @@
+body{
+    font-family: "Doto";
+    background-color: rgb(247, 247, 246);
+}
+
+
+
+#input-container{
+    display: flex;
+    justify-content: center;
+    margin-left: 90px;
+}
+
+#input-container div{
+    margin: 0px 40px;
+}
+
+#show-btn{
+    display: flex;
+    justify-content:center;
+}
+
+#cards-display{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.card {
+    border: 2px solid black;
+    border-radius: 50px;
+    margin: 30px 30px;
+    padding: 20px;
+    background-color: bisque;
+
+}
+#img-div{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+img{
+    width: 200px;
+}
+    

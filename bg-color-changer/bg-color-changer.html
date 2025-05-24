@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bg-Color Changer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="container">
+        <div class="Red">
+            <button onclick="changeColor(this.className)"  class="Red">Red</button>
+        </div>
+        <div class="Blue">
+            <button onclick="changeColor(this.className)" class="Blue">Blue</button>
+        </div>
+        <div class="Green">
+            <button onclick="changeColor(this.className)" class="Green">Green</button>
+        </div>
+        <div class="Beige">
+            <button onclick="changeColor(this.className)" class="Beige">Beige</button>
+        </div>
+        <div class="Yellow">
+            <button onclick="changeColor(this.className)" class="Yellow">Yellow</button>
+        </div>
+        <div class="Black">
+            <button onclick="changeColor(this.className)" class="Black">Black</button>
+        </div>
+        <div class="White">
+            <button onclick="changeColor(this.className)" class="White">default</button>
+        </div>
+    </div>
+</body>
+<script>
+    function changeColor(color){
+        document.querySelector("body").style.backgroundColor = `${color}`
+    }
+</script>
+</html>

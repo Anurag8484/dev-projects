@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taskify ~ The Best Manager of yours</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+</head>
+<body class="bg-light text-dark">
+    <div id="top-container" >
+        <div id="todo">
+            <h4>To Do</h4>
+            <div id="todo-div"></div>
+            <hr>
+  <button type="button" onclick="openModal('addtodo')" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Add ToDo</button>
+
+        </div>
+        <div id="prog">
+            <h4>In Progress</h4>
+            <div id="prog-div"></div>
+            <hr>
+  <button type="button" onclick="openModal('addprog')" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Add In Prog</button>
+
+        </div>
+        <div id="rev">
+            <h4>Under Review</h4>
+            <div id="rev-div"></div>
+            <hr>
+
+  <button type="button" onclick="openModal('addrev')" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Add Rev</button>
+
+        </div>
+        <div id="done">
+            <h4>Done</h4>
+            <div id="dn-div"></div>
+            <hr>
+
+  <button type="button" onclick="openModal('adddn')" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Add Completed</button>
+
+        </div>
+    </div>
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Add Task</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form>
+            <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">Name:</label>
+                <input type="text" class="form-control" id="task-name">
+            </div>
+            <div class="mb-3">
+                <label for="date" class="col-form-label">Date</label>
+                <input type="date" class="form-control" id="date">
+            </div>
+            <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">Difficulty</label>
+                <select class="form-select" aria-label="Default select example" id="diff">
+                <option selected>Open this select menu</option>
+                <option value="Easy">Easy</option>
+                <option value="Med">Med</option>
+                <option value="Hard">Hard</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="message-text" class="col-form-label">Description:</label>
+                <textarea class="form-control" id="description"></textarea>
+            </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="sendMsg">Send message</button>
+        </div>
+        </div>
+    </div>
+    </div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+</body>
+
+
+
+
+
+
+<script>
+    let draggedElement = null;
+
+    function makeDraggable(taskCard){
+        taskCard.setAttribute("draggable", "true");
+        taskCard.addEventListener("dragstart",(e)=>{
+            draggedElement = e.target;
+            e.target.style.opacity="0.5";
+        });
+
+        taskCard.addEventListener("dragend",(e)=>{
+            e.target.style.opacity="1";
+            draggedElement = null;
+        });
+    }
+
+    function enableDropZone(container){
+        container.addEventListener("dragover",(e)=>{
+        e.preventDefault();
+        container.style.border = "2px dashed #000";
+        });
+        container.addEventListener("dragleave", (e) => {
+        container.style.border = ""; // Remove highlight when leaving
+    });
+
+        container.addEventListener("drop",(e)=>{
+            e.preventDefault();
+            container.style.border = "";
+            if (draggedElement) {
+                if (container.id === "todo-div" || container.id === "prog-div" || container.id === "rev-div" || container.id === "dn-div"){
+                    container.appendChild(draggedElement);
+
+                }
+            }
+            else {
+                console.log("not")
+                draggedElement.remove()
+            }
+        });
+    }
+
+    document.addEventListener("DOMContentLoaded",()=>{
+        const todoDiv = document.getElementById("todo-div");
+        const progDiv = document.getElementById("prog-div");
+        const revDiv = document.getElementById("rev-div");
+        const doneDiv = document.getElementById("dn-div");
+
+        enableDropZone(todoDiv);
+        enableDropZone(progDiv);
+        enableDropZone(revDiv);
+        enableDropZone(doneDiv);
+
+    })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    function openModal(functionName){
+        const sendMessageButton = document.getElementById("sendMsg");
+        console.log(sendMessageButton)
+        sendMessageButton.setAttribute('onclick',`${functionName}()`); 
+    }
+
+    function addtodo(){
+        const name = document.getElementById("task-name").value;
+        const desc = document.getElementById("description").value;
+        const date = document.getElementById("date").value;
+        const diff = document.getElementById("diff").value;
+
+
+        const taskCard = document.createElement("div")
+        taskCard.className = "taskCard";
+        makeDraggable(taskCard);
+
+        taskCard.innerHTML = `
+        <div>
+            <h5>${name}</h5>
+        <hr>
+            <h6>${desc}</h6>
+            <p id class="bg-warning text-light">${date}</p>
+            <br>
+            <p id="diff" class="bg-warning text-light>${diff}</p>
+    </div>
+        `
+
+        const tododiv = document.getElementById("todo-div");
+        tododiv.appendChild(taskCard)
+    }
+    function addprog(){
+        const name = document.getElementById("task-name").value;
+        const desc = document.getElementById("description").value;
+        const date = document.getElementById("date").value;
+        const diff = document.getElementById("diff").value;
+
+
+        const taskCard = document.createElement("div")
+        taskCard.className = "taskCard";
+        makeDraggable(taskCard);
+
+
+        taskCard.innerHTML = `
+        <div>
+            <h5>${name}</h5>
+        <hr>
+            <h6>${desc}</h6>
+            ${date}
+            <br>
+            ${diff}
+    </div>
+        `
+
+        const tododiv = document.getElementById("prog-div");
+        tododiv.appendChild(taskCard)
+    }
+    function addrev(){
+        const name = document.getElementById("task-name").value;
+        const desc = document.getElementById("description").value;
+        const date = document.getElementById("date").value;
+        const diff = document.getElementById("diff").value;
+
+
+        const taskCard = document.createElement("div")
+        taskCard.className = "taskCard";
+        makeDraggable(taskCard);
+
+
+        taskCard.innerHTML = `
+               <div>
+            <h5>${name}</h5>
+        <hr>
+            <h6>${desc}</h6>
+            ${date}
+            <br>
+            ${diff}
+    </div>
+        `
+
+        const tododiv = document.getElementById("rev-div");
+        tododiv.appendChild(taskCard)
+    }
+    function adddn(){
+        const name = document.getElementById("task-name").value;
+        const desc = document.getElementById("description").value;
+        const date = document.getElementById("date").value;
+        const diff = document.getElementById("diff").value;
+
+
+        const taskCard = document.createElement("div")
+        taskCard.className = "taskCard";
+        makeDraggable(taskCard);
+
+
+        taskCard.innerHTML = `
+        <div>
+            <h5>${name}</h5>
+        <hr>
+            <h6>${desc}</h6>
+            ${date}
+            <br>
+            ${diff}
+    </div>
+        `
+
+        const tododiv = document.getElementById("dn-div");
+        tododiv.appendChild(taskCard)
+    }
+
+
+
+</script>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Pokemon App</title>
+    <link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Doto:wght@100..900&family=Jersey+15&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="top-container">
+        <div id="input-container">
+            <div id="options">
+                <label for="types">Select the type of Pokemon!</label>
+                <select style="margin-left: 10px;" name="types" id="types">
+                    <option value="fire">Fire</option>
+                    <option value="water">Water</option>
+                    <option value="ice">Ice</option>
+                    <option value="ground">Ground</option>
+                </select>
+            </div>
+            <div id="number">
+                <label for="number">Enter the no. of pokemons you want:</label>
+                <input style="margin-left: 10px;" type="text" name="number" id="input-number">
+            </div>
+        </div>
+        <br>
+        <div id="show-btn">
+            <button  onclick="loadPoke()">Show</button>
+        </div>
+        <hr>
+            <div id="cards-display">
+
+            </div>
+    </div>
+</body>
+
+<script>
+    async function loadPoke(){
+        const count = parseInt(document.getElementById("input-number").value);
+        const type = document.getElementById("types").value;
+        const cardContainer = document.getElementById("cards-display");
+        cardContainer.innerHTML = "Loading....";
+
+        try{
+             const res = await fetch(`https://pokeapi.co/api/v2/type/${type}`);
+             const data = await res.json();
+             const list = data.pokemon.slice(0,count);
+
+             const detailed = await Promise.all(list.map(p=> fetch(p.pokemon.url).then(res=>res.json())));
+
+             cardContainer.innerHTML="";
+            console.log(detailed)
+             detailed.forEach(pokemon => {
+                const card = document.createElement("div");
+                card.className = "card";
+                card.innerHTML = `
+                <div id="img-div">
+                    <img src="${pokemon.sprites.front_default}" alt="${pokemon.name}">
+                </div>
+                <hr>
+                <div id="detail-div">
+                    <h4>Name: ${pokemon.name}</h4>
+                </div>
+                `
+                cardContainer.appendChild(card)
+             });
+
+        }
+        catch (err){
+            cardContainer.innerHTML = "An error occured while fetching!"
+            console.error(err)
+
+        }
+
+    }
+</script>
+</html>
