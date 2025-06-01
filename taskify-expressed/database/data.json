@@ -1,0 +1,36 @@
+[
+  {
+    "id": 1,
+    "name": "user1",
+    "password": "user1",
+    "todos": [
+      {
+        "id": 1,
+        "task": "Buy Car"
+      },
+      {
+        "id": 2,
+        "task": "Buy Bike"
+      },
+      {
+        "id": 3,
+        "task": "Buy House"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "user2",
+    "password": "user2",
+    "todos": [
+      {
+        "id": 1,
+        "task": "Buy Milk"
+      },
+      {
+        "id": 2,
+        "task": "Buy Milk"
+      }
+    ]
+  }
+]
