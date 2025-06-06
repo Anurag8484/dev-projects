@@ -1,0 +1,27 @@
+.main-logo{
+    width: 150px;
+}
+
+.navBar{
+    margin-top: 20px;
+}
+
+.flex {
+    display: flex;
+    /* grid-template-columns: 1fr 1fr 2fr; */
+    justify-content: start;
+    margin: 0px 0px 0px 230px
+}
+.verticalCenterLink{
+display: flex;
+flex-direction: column;
+justify-content: center;
+}
+.verticalCenter div{
+margin-left: 400px;
+}
+
+.verticalCenter a{
+    margin: 0 20px 0 20px;
+    text-decoration: none;
+}
