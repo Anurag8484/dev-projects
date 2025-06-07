@@ -1,9 +1,14 @@
+body{
+    font-family: "Inter", serif;
+}
+
 .main-logo{
-    width: 150px;
+    width: 120px;
 }
 
 .navBar{
     margin-top: 20px;
+    line-height: 30px;
 }
 
 .flex {
@@ -24,4 +29,22 @@ margin-left: 400px;
 .verticalCenter a{
     margin: 0 20px 0 20px;
     text-decoration: none;
+    color: #666;
+    font-size: 15px;
+}
+
+hr{
+    border : 0.2px solid rgba(212, 209, 209, 0.695)
+}
+
+
+.landing{
+    display: flex;
+    justify-content: center;
+}
+
+.landing img{
+    width: 900px;
+    margin:90px 0px 0px 0px;
+    
 }
