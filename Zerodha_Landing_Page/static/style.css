@@ -49,17 +49,93 @@ hr{
     font-size: 2.75rem;
     font-weight: 500;
     color: #424242;
-    line-height: 1.25;
+    margin-bottom: 12px;
 }
 
 .landing-s1{
     font-size: 1.25rem;
     font-weight: 400;
-    margin-top: 10px;
+    margin-top: 0px;
+    color: #424242;
 }
 
 .landing img{
-    width: 900px;
-    margin:90px 0px 0px 0px;
+    width: 800px;
+    margin:80px 0px 0px 0px;
     
+}
+
+.landing-b1{
+    background-color: #387ed1;
+    color: #fff;
+    padding: 10px 30px;   
+    font-size: 1.25rem;
+    border: 1px solid white;
+    border-radius: 3px;
+    font-weight: 540;
+    margin-top: 35px;
+}
+
+.landing-text{
+    margin-top: 20px;
+}
+
+
+.mid-page{
+    display: grid;
+    margin-top: 150px;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    /* text-align: center; */
+    
+}
+
+.mid-right img{
+    width: 620px;
+    margin-right: 150px;
+}
+
+.mid-left{
+    margin-left: 200px;
+}
+
+
+.mid-h1{
+    font-size: 2rem;
+    line-height: 1.5;
+    font-weight: 500;
+    color: #424242;
+}
+
+.mid-sh1{
+    font-size: 1.3rem;
+    font-weight: 500;
+    line-height: 1.7;
+    color: #424242;
+}
+
+.mid-st1{
+    color: #666666;
+    font-weight: 400;
+    line-height: 25px;
+}
+
+.mid-page a{
+    text-decoration: none;
+    color: #387ed1;
+    font-weight: 500;
+}
+
+
+.midR-links{
+    margin-left: 150px;
+}
+
+.mid-right a{
+    margin: 20px;
+}
+
+.mid-bottom{
+    margin-left: 450px;
+    line-height: 190px;
 }
