@@ -139,3 +139,37 @@ hr{
     margin-left: 450px;
     line-height: 190px;
 }
+
+
+.bottom1{
+    display: grid;
+    grid-template-columns: 2fr 2fr;
+    margin: 0px 200px 0px 200px;
+    gap: 100px;
+}
+
+.bottom1-right{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0px;
+}
+
+.bottom1-right-info{
+    display: flex;
+    gap: 0px;
+}
+
+
+.bottom1-right img{
+    width: 120px;
+    margin-right: 0px;
+    vertical-align: middle;
+    height: 11em;
+}
+
+.bottom1-rt-text{
+    width: 100px;
+    font-size: 10px;
+    margin: 100px 0px 0px 0px;
+    color: #666666;
+}
