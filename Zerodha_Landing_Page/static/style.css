@@ -145,13 +145,14 @@ hr{
     display: grid;
     grid-template-columns: 2fr 2fr;
     margin: 0px 200px 0px 200px;
-    gap: 100px;
+    gap: 0px;
 }
 
 .bottom1-right{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 0px;
+    /* margin: 0px 100px 0px 100px; */
 }
 
 .bottom1-right-info{
@@ -165,6 +166,7 @@ hr{
     margin-right: 0px;
     vertical-align: middle;
     height: 11em;
+    display: inline-block;
 }
 
 .bottom1-rt-text{
@@ -172,4 +174,81 @@ hr{
     font-size: 10px;
     margin: 100px 0px 0px 0px;
     color: #666666;
+}
+
+
+.bottom1-h1{
+    font-size: 2rem;
+    line-height: 1.5;
+    font-weight: 500;
+    color: #424242;
+}
+
+.bottom1-t1{
+    color: #424242;
+    line-height: 1.7;
+}
+
+.bottom1 a{
+    text-decoration: none;
+    color: #387ed1;
+}
+
+
+.bottom2{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 100px 100px 100px 100px ;
+    gap: 0px;
+}
+
+.bottom2-h1{    
+    font-size: 2rem;
+    line-height: 1.5;
+    font-weight: 500;
+    color: #424242;
+    margin-bottom: 12px;
+
+}
+
+.bottom2-t1{
+    font-size: 1rem;
+    color: #424242;
+    line-height: 1.8;
+}
+
+
+.bottom2 a{
+    text-decoration: none;
+    color: #387ed1;
+}
+
+.bottom3{
+    text-align: center;
+}
+
+.bottom3-h1{
+    font-size: 2rem;
+    line-height: 1.5;
+    font-weight: 500;
+    color: #424242;
+    margin-bottom: 12px;
+}
+
+.bottom3-t1{
+    font-size: 1rem;
+    color: #424242;
+    line-height: 1.8
+}
+
+.bottom3-btn{
+    font-size: 1.2rem;
+    font-weight: 550;
+    width: 170px;
+    padding: 10px;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    color: #fff;
+    background-color: #387ed1;
+    margin: 20px 0px 50px 0px
 }
