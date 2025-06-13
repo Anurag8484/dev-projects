@@ -33,6 +33,7 @@ header{
 .head-left{
     display: flex;
     align-items: center;
+    text-shadow: 0 0 15px rgba(255,255,255, 0.352);
 }
 
 .head-left img{
@@ -100,6 +101,8 @@ header a:hover{
 
 .head-right button:hover{
     color: #7e00d2;
+    text-shadow: 0 0 15px rgba(255,255,255, 0.352);
+
 }
 
 @keyframes animationGradient{
