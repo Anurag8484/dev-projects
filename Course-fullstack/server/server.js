@@ -26,15 +26,15 @@ async function connectToDB(){
 
 connectToDB();
 
-const adminAuth = (req, res, next) => {
+const adminAuth = async(req, res, next) => {
 //  authMiddleware logic here 
     const token = req.headers.authorization;
-    console.log(token)
     const decodedData = jwt.verify(token,secret);
-
-    if (decodedData && decodedData.role === 'admin'){
+    const user = await Admin.findById(decodedData.id);
+    console.log(user);
+    if (decodedData && user.role === 'admin'){
         req.id = decodedData.id;
-        req.role = decodedData.role
+        req.role = user.role
         next();
     }else{
         res.status(403).json({
@@ -42,13 +42,15 @@ const adminAuth = (req, res, next) => {
         });
     };
 };
-const userAuth = (req, res, next) => {
+const userAuth = async(req, res, next) => {
 //  authMiddleware logic here 
     const token = req.headers.authorization;
     const decodedData = jwt.verify(token,secret);
+    const user = await User.findById(decodedData.id);
 
-    if (decodedData && decodedData.role === 'user'){
+    if (decodedData && user.role === 'user'){
         req.id = decodedData.id;
+        req.role = user.role;
         next();
     }else{
         res.status(403).json({
@@ -86,7 +88,7 @@ app.post('/admin/signup',async function(req, res){
     try {
         await Admin.create({
             email:email,
-            password:password,
+            password:hashedPassword,
             name:name
         });
     } catch (error) {
@@ -140,7 +142,6 @@ app.post('/admin/login', async (req, res) => {
 
 app.post('/admin/courses', adminAuth, async(req, res) => {
     // logic to create a course
-
     const id = req.id;
     const title = req.body.title;
     const description = req.body.description;
@@ -172,6 +173,7 @@ app.post('/admin/courses', adminAuth, async(req, res) => {
 
 app.put('/admin/courses/:courseId',adminAuth, async(req, res) => {
     // logic to edit a course
+    console.log("Yaha to aagya")
     const id = req.id;
     const courseId = parseInt(req.params.courseId)
     const title = req.body.title;
@@ -192,6 +194,7 @@ app.put('/admin/courses/:courseId',adminAuth, async(req, res) => {
             },
             {new: true}
         );
+        await updatedCourse.save();
         res.json({
             message:"Course edited!"
         });
@@ -201,9 +204,7 @@ app.put('/admin/courses/:courseId',adminAuth, async(req, res) => {
                 error: `Failed to edit course to DataBase`
             })
             return;
-    }
-
-
+        }
 });
 
 app.get('/admin/courses', adminAuth, async(req, res) => {
@@ -236,7 +237,6 @@ app.post('/users/signup', async(req, res) => {
         password: z.string().min(3).max(20),
         name: z.string().min(3).max(20)
     });
-
     const safeParse = reqBody.safeParse(req.body);
 
     if (!safeParse){
@@ -244,33 +244,36 @@ app.post('/users/signup', async(req, res) => {
             error: safeParse.error.issues[0].message
         });
     }
-    const email = req.body.email;
-    const name = req.body.name;
-    const password = req.body.password;
 
+    const email = req.body.email;
+    const password = req.body.password;
+    const name = req.body.name;
+    
     const hashedPassword = await bcrypt.hash(password,3);
-    try{
-        await User.create({
-            email: email,
-            password: password,
-            name: name
-        });
-        res.json({
-            message: `User Signed Up!!`
-        })
-    }catch (err){
-        res.json({
-            db_error:err.errorResponse.errmsg,
-            error: `Error adding the user in the DB ${err}!`
-        });
-        return;
+
+    try {
+      await User.create({
+        email: email,
+        password: hashedPassword,
+        name: name,
+      });
+      res.json({
+        message: `User Signed Up!!`,
+      });
+    } catch (err) {
+      res.json({
+        db_error: err.errorResponse.errmsg,
+        error: `Error adding the user in the DB ${err}!`,
+      });
+      return;
     }
 });
 
+
 app.post('/users/login', async(req, res) => {
     // logic to log in user
-    const email = req.body.email;
-    const password = req.body.password;
+    const email = req.headers.email;
+    const password = req.headers.password;
 
     let user;
     let passwordMatch;
@@ -303,22 +306,63 @@ app.post('/users/login', async(req, res) => {
     }
 });
 
-app.get('/users/courses', async(req, res) => {
+app.get('/users/courses',userAuth, async(req, res) => {
     // logic to list all courses
-
-
-
-
-
-
+    try {
+      const courses = await Course.find();
+      if (courses.length == 0) {
+        res.json({
+          message: "At present, there are 0 courses.",
+        });
+        return;
+      }
+      res.json({
+        courses: courses,
+      });
+    } catch (error) {
+      console.error(`Error fetching courses from DB: ${error}`);
+      res.json({
+        message: `Error fetching courses from DB: ${error}`,
+      });
+    }
 });
 
-app.post('/users/courses/:courseId', (req, res) => {
+app.post('/users/courses/:courseId', async(req, res) => {
     // logic to purchase a course
+    const courseId = req.params.courseId;
+    const id = req.id;
+    try{
+        let user = await User.findById(id);
+        let course = await Course.findById(courseId);
+        if(user){
+            user.courses.push(course);
+            await user.save();
+            res.json({
+                message: "Course added !"
+            });
+            return;
+        }
+    }catch (err){
+        res.json({
+            message:`${err}`
+        });
+        return;
+    }
 });
 
-app.get('/users/purchasedCourses', (req, res) => {
+app.get('/users/purchasedCourses', async(req, res) => {
     // logic to view purchased courses
+    const id = req.id;
+    try {
+        const user = await User.findById(id);
+        res.json({
+            purchasedCourses: user.courses
+        });
+    } catch (error) {
+        res.json({
+            error:`error`
+        })
+    }
 });
 
 app.listen(port, () => {
