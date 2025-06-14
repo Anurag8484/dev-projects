@@ -19,9 +19,7 @@ const port = process.env.PORT;
 
 async function connectToDB(){
     try {
-        await mongoose.connect(
-          "mongodb+srv://anurag:8484@cluster0.u7mqesb.mongodb.net/Coursify"
-        );
+        await mongoose.connect(process.env.MONGO_URI);
     } catch (error) {
             console.error(`Error connecting to DB: ${error}`);
     }
@@ -70,7 +68,7 @@ app.post('/admin/signup',async function(req, res){
     const hashedPassword = await bcrypt.hash(password,3);
     
     try {
-        await User.create({
+        await Admin.create({
             email:email,
             password:password,
             name:name
@@ -83,7 +81,7 @@ app.post('/admin/signup',async function(req, res){
     }
 
     res.json({
-        message:"You are signed up !!"
+        message:"Admin signed up !!"
     });
 
 });
@@ -99,11 +97,30 @@ app.post('/admin/login', async (req, res) => {
     let passwordMatch;
 
     try {
-        admin = await Admin.findOne()
-    }catch (error){
+        admin = await Admin.findOne({
+            email: email
+        });
 
+        passwordMatch =  bcrypt.compare(password,admin.password);
+    }catch (error){
+        console.error(`Error finding in DB: ${error}`);
+    }
+
+    if (passwordMatch){
+        const token = jwt.sign({
+            id: admin._id.toString()
+        }, secret);
+        res.json({
+            message:"Admin Loged IN",
+            token: token
+        })
+    }else{
+        res.status(403).json({
+            error: "Incorrect Credentials."
+        });
     }
 });
+
 
 app.post('/admin/courses', (req, res) => {
     // logic to create a course
