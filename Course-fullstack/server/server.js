@@ -1,19 +1,32 @@
 
-
-
-
 //  TODO: Can you create backend with standard folder structure like: week-4/hard ???
 const express = require('express');
 const jwt = require('jsonwebtoken');
-const mongoose = require('mongoose');
+const  mongoose = require('mongoose');
 const dotenv = require("dotenv");
 dotenv.config();
 const app = express();
-
+const bcrypt = require("bcrypt");
+const { z } = require('zod');
 app.use(express.json());
+
 
 const secret = process.env.JWT_SECRERT;  // This should be in an environment variable in a real application
 const port = process.env.PORT;
+
+// Connect to DB:
+
+async function connectToDB(){
+    try {
+        await mongoose.connect(
+          "mongodb+srv://anurag:8484@cluster0.u7mqesb.mongodb.net/Coursify"
+        );
+    } catch (error) {
+            console.error(`Error connecting to DB: ${error}`);
+    }
+}
+
+connectToDB();
 
 // Define mongoose schemas
 const userSchema = new mongoose.Schema({
