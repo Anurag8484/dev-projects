@@ -17,7 +17,6 @@ const adminSchema = new mongoose.Schema({
   email: { type: String, unique: true },
   password: { type: String },
   name: { type: String },
-  role: { type: String, default: "admin" },
 });
 
 const courseSchema = new mongoose.Schema({
@@ -27,8 +26,16 @@ title: { type: String, unique: true },
 description: { type: String },
 price: { type: Number },
 imageLink: { type: String },
-published: { type: Boolean}
+published: { type: Boolean},
+userId: { type: ObjectId}
 
 });
+const User = mongoose.model('User', userSchema);
+const Admin = mongoose.model('Admin', adminSchema);
+const Course = mongoose.model('Course', courseSchema);
 
-
+module.exports={
+    User: User,
+    Admin: Admin,
+    Course: Course
+}

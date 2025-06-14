@@ -1,6 +1,7 @@
 
 //  TODO: Can you create backend with standard folder structure like: week-4/hard ???
 const express = require('express');
+const { User, Admin, Course } = require("./db")
 const jwt = require('jsonwebtoken');
 const  mongoose = require('mongoose');
 const dotenv = require("dotenv");
@@ -28,39 +29,80 @@ async function connectToDB(){
 
 connectToDB();
 
-// Define mongoose schemas
-const userSchema = new mongoose.Schema({
-  // userSchema here
-});
-
-const adminSchema = new mongoose.Schema({
-// adminSchema here
-});
-
-const courseSchema = new mongoose.Schema({
-// courseSchema here
-});
-
-// Define mongoose models
-const User = mongoose.model('User', userSchema);
-const Admin = mongoose.model('Admin', adminSchema);
-const Course = mongoose.model('Course', courseSchema);
-
 const authMiddleware = (req, res, next) => {
 //  authMiddleware logic here 
-};
+    const token = req.headers.token;
+    const decodedData = jwt.verify(token,secret);
 
-// Connect to MongoDB
-mongoose.connect('<YourMongoDbConnectionString>'); 
+    if (decodedData){
+        req.id = decodedData.id;
+        next();
+    }else{
+        res.status(403).json({
+            error: "Incorrect Credentials!"
+        });
+    };
+};
 
 
 // Admin routes
-app.post('/admin/signup', (req, res) => {
+app.post('/admin/signup',async function(req, res){
     // logic to sign up admin
+    const reqBody = z.object({
+        email: z.string().min(3).max(20).email(),
+        name: z.string().min(3).max(20),
+        password: z.string().min(3).max(20)
+    });
+
+    const SafeData = reqBody.safeParse(req.body);
+
+    if(!SafeData){
+        res.json({
+            error:SafeData.error.issues[0].message
+        });
+        return;
+    }
+
+    const email = req.body.email;
+    const password = req.body.password;
+    const name  = req.body.name;
+
+    const hashedPassword = await bcrypt.hash(password,3);
+    
+    try {
+        await User.create({
+            email:email,
+            password:password,
+            name:name
+        });
+    } catch (error) {
+        res.json({
+            error:`Error adding to database: ${error.errorResponse.errmsg}`
+        });
+        return;
+    }
+
+    res.json({
+        message:"You are signed up !!"
+    });
+
 });
 
-app.post('/admin/login', (req, res) => {
+app.post('/admin/login', async (req, res) => {
     // logic to log in admin
+
+    const email = req.body.email;
+    const password  = req.body.password;
+    const name = req.body.name;
+
+    let admin;
+    let passwordMatch;
+
+    try {
+        admin = await Admin.findOne()
+    }catch (error){
+
+    }
 });
 
 app.post('/admin/courses', (req, res) => {
