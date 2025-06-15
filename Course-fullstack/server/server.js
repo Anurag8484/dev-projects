@@ -339,7 +339,7 @@ app.post('/users/courses/:courseId', async(req, res) => {
     const id = req.id;
     try{
         let user = await User.findById(id);
-        let course = await Course.findById(courseId);
+        let course = await Course.findOne({courseId:courseId});
         if(user){
             user.courses.push(course);
             await user.save();
