@@ -29,6 +29,12 @@ connectToDB();
 const adminAuth = async(req, res, next) => {
 //  authMiddleware logic here 
     const token = req.headers.authorization;
+    if (!token){
+        res.json({
+            error:"Please provied authorization token in the header."
+        });
+        return;
+    }
     const decodedData = jwt.verify(token,secret);
     const user = await Admin.findById(decodedData.id);
     console.log(user);
@@ -45,6 +51,12 @@ const adminAuth = async(req, res, next) => {
 const userAuth = async(req, res, next) => {
 //  authMiddleware logic here 
     const token = req.headers.authorization;
+    if (!token) {
+      res.json({
+        error: "Please provied authorization token in the header.",
+      });
+      return;
+    }
     const decodedData = jwt.verify(token,secret);
     const user = await User.findById(decodedData.id);
 
@@ -333,14 +345,15 @@ app.get('/users/courses',userAuth, async(req, res) => {
     }
 });
 
-app.post('/users/courses/:courseId', async(req, res) => {
+app.post('/users/courses/:courseId', userAuth, async(req, res) => {
     // logic to purchase a course
-    const courseId = req.params.courseId;
+    const courseId = parseInt(req.params.courseId);
     const id = req.id;
     try{
         let user = await User.findById(id);
         let course = await Course.findOne({courseId:courseId});
         if(user){
+            console.log(course)
             user.courses.push(course);
             await user.save();
             res.json({
@@ -356,11 +369,11 @@ app.post('/users/courses/:courseId', async(req, res) => {
     }
 });
 
-app.get('/users/purchasedCourses', async(req, res) => {
+app.get('/users/purchasedCourses',userAuth, async(req, res) => {
     // logic to view purchased courses
     const id = req.id;
     try {
-        const user = await User.findById(id);
+        const user = await User.findById(id).populate("courses");;
         res.json({
             purchasedCourses: user.courses
         });
