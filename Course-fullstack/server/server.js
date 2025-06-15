@@ -245,6 +245,8 @@ app.post('/users/signup', async(req, res) => {
         });
     }
 
+  
+
     const email = req.body.email;
     const password = req.body.password;
     const name = req.body.name;
@@ -271,39 +273,43 @@ app.post('/users/signup', async(req, res) => {
 
 
 app.post('/users/login', async(req, res) => {
-    // logic to log in user
-    const email = req.headers.email;
-    const password = req.headers.password;
+  // logic to log in user
+  const email = req.headers.email;
+  const password = req.headers.password;
 
-    let user;
-    let passwordMatch;
+  let user;
+  let passwordMatch;
+  
 
-    try {
-        user = await User.find({
-            email: email
-        })
+  try {
+    user = await User.findOne({
+      email: email,
+    });
 
-        passwordMatch =  bcrypt.compare(password, user.password);
-    } catch (error) {
-        res.json({
-            error: `Error finding User in the DB: ${error}`
-        })
-    }
+    passwordMatch = bcrypt.compare(password, user.password);
+  } catch (error) {
+    res.json({
+      error: `Error finding User in the DB: ${error}`,
+    });
+  }
 
-    if(passwordMatch){
-        const token = jwt.sign({
-            id: user._id.toString()
-        },secret);
-        res.json({
-            message:`User Loged In.`,
-            token: token
-        });
-    }else{
-        res.json({
-            error: "Incorrect Credentials!"
-        });
-        return;
-    }
+  if (passwordMatch) {
+    const token = jwt.sign(
+      {
+        id: user._id.toString(),
+      },
+      secret
+    );
+    res.json({
+      message: `User Loged In.`,
+      token: token,
+    });
+  } else {
+    res.json({
+      error: "Incorrect Credentials!",
+    });
+    return;
+  }
 });
 
 app.get('/users/courses',userAuth, async(req, res) => {

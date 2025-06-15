@@ -8,8 +8,12 @@ const userSchema = new mongoose.Schema({
   email: { type: String, unique: true },
   password: { type: String },
   name: { type: String },
-  courses: {type: Array},
-  role: { type: [mongoose.Schema.Types.ObjectId],ref: 'Course', default: [] },
+  role: { type: String, default: "user" },
+  courses: {
+    type: [mongoose.Schema.Types.ObjectId],
+    ref: "Course",
+    default: [],
+  },
 });
 
 const adminSchema = new mongoose.Schema({
