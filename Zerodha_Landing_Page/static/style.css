@@ -264,7 +264,7 @@ hr{
 
 footer{
     margin-top: 50px;
-    padding: 50px;
+    padding: 36px;
     background-color: #fbfbfb;
     border-top: 1px ;
     box-shadow: 2px 1px 2px #000000; 
@@ -274,13 +274,14 @@ footer{
 .start-container{
     display: grid;
     grid-template-columns: 1fr 2.5fr;
-    gap: 100px;
+    gap: 50px;
 
 }
 
 
 .footer-left{
     margin-left: 150px;
+    margin-top: 25px;
 }
 
 .footer-left p{
@@ -319,3 +320,42 @@ footer{
     width: 150px;
     margin-bottom: 12px;
 }
+
+
+.footer-right{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+
+.nav-head{
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: #424242;
+    margin-bottom: 10px;
+    line-height: 2;
+}
+
+.nav-bot{
+    font-size: 14px;
+    color: #666;
+}
+
+.last{
+    padding: 120px;
+    font-size: 0.65rem;
+    /* width: 100%; */
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #9b9b9b;
+    line-height: 2;
+}
+
+
+.last a{
+    text-decoration: none;
+    color: #387ed1;
+    font-weight: 500;
+}
+
+
