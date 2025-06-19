@@ -1,0 +1,16 @@
+header {
+    border: 1px solid black;
+    display: flex;
+    justify-content: space-between;
+    /* position: sticky; */
+    /* top: 00px; */
+    /* background-color: rgba(250, 235, 215, 0.432); */
+}
+
+
+.right{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 50px;
+}
