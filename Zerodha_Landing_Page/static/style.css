@@ -1,27 +1,36 @@
 body{
     font-family: "Inter", serif;
+    margin: 0px;
 }
 
 .main-logo{
     width: 120px;
 }
 
+header{
+    
+    position: sticky;
+    top: 0px;
+    background-color: #fff;
+}
+
+
 .navBar{
-    margin-top: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+
     line-height: 30px;
+    border-bottom: 1px;
+    box-shadow: 2px 1px 2px #eee; 
+
 }
 
 .flex {
     display: flex;
-    /* grid-template-columns: 1fr 1fr 2fr; */
-    justify-content: start;
-    margin: 0px 0px 0px 230px
+    justify-content: space-evenly;
+    margin: 0px 0px 0px 0px
 }
-.verticalCenterLink{
-display: flex;
-flex-direction: column;
-justify-content: center;
-}
+
 .verticalCenter div{
 margin-left: 400px;
 }
@@ -251,4 +260,62 @@ hr{
     color: #fff;
     background-color: #387ed1;
     margin: 20px 0px 50px 0px
+}
+
+footer{
+    margin-top: 50px;
+    padding: 50px;
+    background-color: #fbfbfb;
+    border-top: 1px ;
+    box-shadow: 2px 1px 2px #000000; 
+
+}
+
+.start-container{
+    display: grid;
+    grid-template-columns: 1fr 2.5fr;
+    gap: 100px;
+
+}
+
+
+.footer-left{
+    margin-left: 150px;
+}
+
+.footer-left p{
+    font-size: 0.8rem;
+    line-height: 11px;
+    color: #666;
+}
+
+.social-logos1{
+    color: #666;
+    font-size: 1.3rem;
+    display: flex;
+    gap: 20px;
+    border-bottom: 1px;
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+
+.social-logos2{
+    color: #666;
+    display: flex;
+    font-size: 1.3rem;
+
+    gap: 20px;
+    border-bottom: 1px;
+    margin-top: 15px;
+
+}
+
+
+.footer-right{
+    margin-right: 150px;
+}
+
+.footer-left img{
+    width: 150px;
+    margin-bottom: 12px;
 }
