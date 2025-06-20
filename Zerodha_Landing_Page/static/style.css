@@ -342,11 +342,10 @@ footer{
 }
 
 .last{
-    padding: 120px;
+    padding:  120px 120px 0px 120px;
     font-size: 0.65rem;
     /* width: 100%; */
     margin-top: 0;
-    margin-bottom: 10px;
     color: #9b9b9b;
     line-height: 2;
 }
@@ -358,4 +357,19 @@ footer{
     font-weight: 500;
 }
 
+
+.bottom-last{
+    display: flex;
+    font-size: 0.75rem;
+    color: #9b9b9b;
+    line-height: 4;  
+    gap: 25px;
+    justify-content: center;
+    margin-top: 0px;
+}
+
+
+.bottom-last div{
+    cursor: pointer;
+}
 
