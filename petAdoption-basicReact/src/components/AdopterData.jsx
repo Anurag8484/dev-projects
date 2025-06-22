@@ -1,7 +1,3 @@
-import { Pet } from "./Pet";
-
-
-
 export function OwnerData({data, dataVisible}){
     console.log(data)
     

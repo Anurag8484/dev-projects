@@ -2,7 +2,7 @@ import { useState } from 'react'
 // import reactLogo from './assets/react.svg'
 // import viteLogo from '/vite.svg'
 import './App.css'
-import { Pet } from './Pet';
+import { Pet } from './components/Pet';
 
 // function App() {
 //   const [count, setCount] = useState(0)
@@ -39,6 +39,7 @@ import { Pet } from './Pet';
 function App() {
   return (
     <>
+    <header>Petify</header>
       <Pet />
     </>
   );

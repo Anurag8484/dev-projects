@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { OwnerData } from "./AdopterData";
+import { validation } from "../utils/validation";
 export function Pet() {
     const [formData, setformData] = useState([])
     const [values, setValues] = useState({
@@ -14,13 +15,28 @@ export function Pet() {
     const { petName, type, breed, ownerName, email, phone } = values;
     // console.log(petName, type, breed, ownerName, email, phone);
 
+    const [errors, setErrors] = useState({
+      petName: "",
+      type: "",
+      breed: "",
+      ownerName: "",
+      email: "",
+      phone: "",
+    });
+
 
 
     function handleChange(event){
         const {name, value} = event.target;
+    
         setValues((c)=>({
             ...c,[name]: value,
         }));
+
+        let errorsCopy = { ...errors };
+        const errorR = validation(name,value, errorsCopy)
+        console.log(errorR)
+        setErrors(errorR)
 
     }
 
@@ -44,6 +60,14 @@ export function Pet() {
           email: "",
           phone: "",
         });
+        setErrors({
+          petName: "",
+          type: "",
+          breed: "",
+          ownerName: "",
+          email: "",
+          phone: "",
+        });
     };
     function dataVisible(){
         setTable(c=>!c)
@@ -58,7 +82,6 @@ if(!showTable){
           <div className="formBox">
             <div className="inputs">
               <label htmlFor="petName">Pet Name</label>
-              <br />
               <input
                 type="text"
                 name="petName"
@@ -67,10 +90,10 @@ if(!showTable){
                 value={petName}
                 onChange={handleChange}
               />
+              <small>{errors.petName}</small>
             </div>
             <div className="inputs">
               <label htmlFor="type">Pet Type</label>
-              <br />
               <select value={type} name="type" id="" onChange={handleChange}>
                 <option value="select">Select from options</option>
                 <option value="dog">Dog</option>
@@ -78,9 +101,9 @@ if(!showTable){
                 <option value="bird">Bird</option>
               </select>
             </div>
+
             <div className="inputs">
               <label htmlFor="breed">Breed</label>
-              <br />
               <input
                 value={breed}
                 type="text"
@@ -89,11 +112,11 @@ if(!showTable){
                 placeholder="Breed.."
                 onChange={handleChange}
               />
+              <small>{errors.breed}</small>
             </div>
             <div className="inputs">
               <label htmlFor="ownerName">Owner Name</label>
-              <br />
-  
+
               <input
                 type="text"
                 name="ownerName"
@@ -102,11 +125,11 @@ if(!showTable){
                 value={ownerName}
                 onChange={handleChange}
               />
+            <small>{errors.ownerName}</small>
             </div>
             <div className="inputs">
               <label htmlFor="email">Email</label>
-              <br />
-  
+
               <input
                 type="email"
                 name="email"
@@ -115,11 +138,10 @@ if(!showTable){
                 value={email}
                 onChange={handleChange}
               />
+              <small>{errors.email}</small>
             </div>
             <div className="inputs">
               <label htmlFor="phone">Phone</label>
-              <br />
-  
               <input
                 type="text"
                 name="phone"
@@ -128,11 +150,14 @@ if(!showTable){
                 value={phone}
                 onChange={handleChange}
               />
+              <small>{errors.phone}</small>
             </div>
           </div>
           <div className="buttonBox">
-          <button className="sbmtbutton" onClick={handleSubmit}>Submit</button>
-          <button onClick={dataVisible}>View Data</button>
+            <button className="sbmtbutton" onClick={handleSubmit}>
+              Submit
+            </button>
+            <button onClick={dataVisible}>View Data</button>
           </div>
         </div>
       </div>
