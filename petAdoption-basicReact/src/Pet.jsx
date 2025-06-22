@@ -48,6 +48,7 @@ export function Pet() {
     function dataVisible(){
         setTable(c=>!c)
         console.log(showTable)
+    
     }
 if(!showTable){
 
@@ -139,7 +140,7 @@ if(!showTable){
 }else{
     return (
       <>
-        <OwnerData data={formData} />
+        <OwnerData data={formData} dataVisible={dataVisible} />
       </>
     );
 }
