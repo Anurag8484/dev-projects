@@ -8,7 +8,7 @@ export function OwnerData({data, dataVisible}){
     return (
       <>
         <div className="cardContainer">
-            {data.map((data,index)=>{
+            {data.map((data,index)=>(
           <div className="card" key={index}>
             <p>Pet Name: {data.petName}</p>
             <hr className="hrLine" />
@@ -18,7 +18,7 @@ export function OwnerData({data, dataVisible}){
             <p>Email: {data.email}</p>
             <p>Phone: {data.phone}</p>
           </div>
-            })}
+            ))}
           
         <div className="addbtn">
           <button onClick={dataVisible} className="add">View Form</button>
