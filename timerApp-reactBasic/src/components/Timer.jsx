@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
 import { calculateTime, formatTime } from "../utils/auxilaryFunctions";
+import alarmSoundFile from "../assets/abra.mp3";
 
 export const Timer = () => {
   const [time, setTime] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
   const [editState, setEditState] = useState({ field: null, value: "" });
   const [initialTime, setInitialTime] = useState(0);
+  const alarmSound = new Audio(alarmSoundFile);
+
 
   useEffect(()=>{
     const progress = initialTime > 0 ? (time/initialTime)*100 : 0;
@@ -18,11 +21,13 @@ export const Timer = () => {
       interval = setInterval(() => {
         setTime((prevTime) => prevTime - 1);
       }, 1000);
-    } else if (time === 0) {
-      setIsRunning(false);
+    } else if (time === 0 ) {
+        setIsRunning(false);
+        alarmSound.play()
     }
 
     return () => {
+        console.log("interval")
       if (interval) clearInterval(interval);
     };
   }, [time, isRunning]);
@@ -106,7 +111,7 @@ export const Timer = () => {
         </div>
         <div className="buttons">
           <button onClick={() => setIsRunning(!isRunning)}>
-            {isRunning ? "Pause" : "Start"}
+            {isRunning && time>0 ? "Pause" : "Start"}
           </button>
 
           <button
