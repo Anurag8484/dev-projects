@@ -7,6 +7,7 @@ function App(){
 
   return(
     <>
+    <h3>Timex</h3>
     <Timer />
     </>
   )
