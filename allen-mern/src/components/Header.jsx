@@ -2,7 +2,7 @@ import logo from "../assets/logo.svg";
 import banner1 from "../assets/banner1.png"
 import neet1 from "../assets/neet-1.png"
 import neet2 from "../assets/neet-2.png"
-import neet3 from "../assets/neet-1.png"
+import neet3 from "../assets/neet-3.png"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone } from "@fortawesome/free-solid-svg-icons";
 
@@ -76,7 +76,7 @@ export function Header() {
                 <div className="card-bottom-text">
                   <p>View Courses</p>
                 </div>
-                <img src={neet1} alt="" />
+                <img src={neet3} alt="" />
               </div>
             </div>
           </div>
