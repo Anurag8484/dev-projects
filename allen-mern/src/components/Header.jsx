@@ -1,4 +1,5 @@
 import logo from "../assets/logo.svg";
+import banner1 from "../assets/banner1.png"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone } from "@fortawesome/free-solid-svg-icons";
 
@@ -31,6 +32,14 @@ export function Header() {
           </p>
         </div>
       </header>
+
+      <section className="hero">
+
+        <div className="hero-banner">
+            <img src={banner1} alt="" />
+        </div>
+
+      </section>
       
     </>
   );

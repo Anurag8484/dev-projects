@@ -3,6 +3,7 @@
 body {
     font-family: 'Plus Jakarta Sans', sans-serif;
     margin: 0px;
+    background-color: #edf2fa;
   }
 
 header{
@@ -72,4 +73,14 @@ header{
 
 .header-banner code{
     font-size: 0.4rem;
+}
+
+.hero-banner{
+    display: flex;
+    justify-content: center;
+    margin-top: 55px;
+}
+
+.hero-banner img{
+    width: 700px;
 }
