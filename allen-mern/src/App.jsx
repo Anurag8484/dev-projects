@@ -1,19 +1,17 @@
-import { BrowserRouter,Routes,Route } from "react-router-dom";
-import { Landing } from "./components/Landing";
-function App(){
+import "./App.css"
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Header } from "./components/Header";
+import { Layout } from "./components/Layout";
 
-  return(
+function App() {
+  return (
     <BrowserRouter>
       <Routes>
-        <Route element={<Landing />} path="/"/>
+        <Route path="/" element={<Layout />}>
+        </Route>
       </Routes>
     </BrowserRouter>
-  )
-
-
-
+  );
 }
-
-
 
 export default App;
