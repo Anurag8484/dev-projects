@@ -10,6 +10,9 @@ const app = express();
 const bcrypt = require("bcrypt");
 const { z } = require('zod');
 app.use(express.json());
+const cors = require('cors')
+app.use(cors());
+const axios = require('axios')
 
 
 const secret = process.env.JWT_SECRERT;  // This should be in an environment variable in a real application
@@ -287,7 +290,9 @@ app.post('/users/signup', async(req, res) => {
 app.post('/users/login', async(req, res) => {
   // logic to log in user
   const email = req.headers.email;
+  console.log(email)
   const password = req.headers.password;
+  console.log(password)
 
   let user;
   let passwordMatch;
@@ -303,6 +308,7 @@ app.post('/users/login', async(req, res) => {
     res.json({
       error: `Error finding User in the DB: ${error}`,
     });
+    return;
   }
 
   if (passwordMatch) {
@@ -316,6 +322,7 @@ app.post('/users/login', async(req, res) => {
       message: `User Loged In.`,
       token: token,
     });
+    return;
   } else {
     res.json({
       error: "Incorrect Credentials!",

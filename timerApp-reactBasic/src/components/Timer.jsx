@@ -23,12 +23,17 @@ export const Timer = () => {
       }, 1000);
     } else if (time === 0 ) {
         setIsRunning(false);
-        alarmSound.play()
+        try {
+            alarmSound.play()
+
+        } catch (error) {
+            console.error(error)            
+        }
     }
 
     return () => {
-        console.log("interval")
       if (interval) clearInterval(interval);
+      alarmSound.pause()
     };
   }, [time, isRunning]);
 
