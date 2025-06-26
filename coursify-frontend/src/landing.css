@@ -32,11 +32,15 @@
     justify-content: center;
 }
 
-.card-content{
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 1rem;
-    align-items: center;
+.card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.0rem;
+}
+.formField {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
 }
 
 
@@ -49,6 +53,12 @@
     gap: 1px;
 }
 
+.inputField small {
+    color: red;
+    font-size: 0.75rem;
+    margin-top: 0.2rem;
+  }
+  
 .card-footer p{
     font-size: 0.7rem;
 }
@@ -91,4 +101,9 @@
     transform: scale(1.1);
     /* background-color: rgba(0, 0, 0, 0.757); */
 
+}
+
+.inputField{
+    display: flex;
+    flex-direction: column;
 }
