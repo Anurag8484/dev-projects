@@ -1,0 +1,24 @@
+body{
+    background-color: #edf2fa;
+    margin: 0px;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding: 8px 5px 8px 5px;
+    position: sticky;
+    top: 0;
+}
+
+
+.header-middle{
+    display: flex;
+    gap: 29px;
+}
+
+.header-middle p{
+    margin: 0px;
+}
