@@ -1,0 +1,119 @@
+body {
+  margin: 0;
+  font-family: monospace;
+  background-color: #f8f9fa;
+}
+
+.quiz-wrapper {
+  /* max-width: 800px; */
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 50px;
+  margin: auto;
+  padding: 1rem;
+}
+
+.quiz-header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.quiz-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.quiz-info-card {
+  background: white;
+  position: sticky;
+  top: 19px;
+  height: 200px;
+  margin: 0px 0px 20px 0px;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+.quiz-info-card-buttons {
+  background: white;
+  position: sticky;
+  top: 289px;
+  height: 100px;
+  margin: 20px 0px 200px 0px;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.button-section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.test-sbmt{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.test-sbmt {
+    cursor: pointer;
+    border: 1px solid;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 1rem;
+    color: white;
+    font-weight: 600;
+    background-color: green;
+    transition: 0.5s;
+    
+}
+
+.exit-exam{
+    background-color: red;
+}
+
+.test-sbmt:hover{
+    background-color: black;
+    transform: scale(1.1);
+    text-shadow: 0px 0px 5px white;
+}
+
+
+.quiz-info-card h2 {
+  margin: 0;
+}
+
+
+.quiz-question {
+  background: #f1f3f5;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.05);
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.options label {
+  background: white;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+
+.options label:hover {
+  background-color: #f0f8ff;
+  border-color: #90caf9;
+}
