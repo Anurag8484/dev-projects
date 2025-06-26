@@ -1,15 +1,40 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import "../landing.css";
 export function Landing() {
-  const [switchCard, setSwitchCard] = useState(true);
-  const [user, setUser] = useState({ name: "", email: "", password: "" });
+    const [switchCard, setSwitchCard] = useState(true);
+    const [user, setUser] = useState({ name: "", email: "", password: "" });
+    const [errors, setErrors] = useState({ name: "", email: "", password: "" });
+    const [validCred, setValidCred] = useState(true);
+    const navigate = useNavigate();
 
   function HandleInputChange(event) {
-    const {name,value} = event.target;
-    
+    const { name, value } = event.target;
+    setUser((p) => ({
+      ...p,
+      [name]: value,
+    }));
   }
 
-  async function Signup() {}
+  async function Signup() {
+    try {
+      const res = await axios.post(
+        "http://localhost:3001/users/signup",
+           {
+            name: user.name,
+            email: user.email,
+            password: user.password,
+          },
+        
+      );
+      if (res.status){
+        navigate("/home")
+      }else{
+
+      }
+    } catch (error) {}
+  }
   async function Signin() {}
 
   if (switchCard) {
@@ -44,12 +69,17 @@ export function Landing() {
               />
             </div>
             <div className="card-footer">
-              <button>SignUp</button>
+              <button onClick={Signup}>SignUp</button>
               <p>
                 Already Registered!{" "}
                 <span onClick={() => setSwitchCard(false)}>Login</span>
               </p>
-              <div className="errorDiv">Invalid Credentials</div>
+
+              {!validCred ? (
+                <div className="errorDiv">Invalid Credentials</div>
+              ) : (
+                ""
+              )}
             </div>
           </div>
         </section>
@@ -85,7 +115,11 @@ export function Landing() {
                 New User?{" "}
                 <span onClick={() => setSwitchCard(true)}>SignUp</span>
               </p>
-              <div className="errorDiv">Invalid Credentials</div>
+              {!validCred ? (
+                <div className="errorDiv">Invalid Credentials</div>
+              ) : (
+                ""
+              )}
             </div>
           </div>
         </section>
