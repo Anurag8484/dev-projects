@@ -253,12 +253,14 @@ app.post('/users/signup', async(req, res) => {
         name: z.string().min(3).max(20)
     });
     const safeParse = reqBody.safeParse(req.body);
+    console.log(req.body)
 
-    if (!safeParse){
-        res.json({
+    if (!safeParse.success){
+        return res.status(40).json({
             error: safeParse.error.issues[0].message
         });
     }
+    console.log(safeParse)
 
   
 
@@ -324,7 +326,7 @@ app.post('/users/login', async(req, res) => {
     });
     return;
   } else {
-    res.json({
+    res.status(401).json({
       error: "Incorrect Credentials!",
     });
     return;
@@ -392,5 +394,5 @@ app.get('/users/purchasedCourses',userAuth, async(req, res) => {
 });
 
 app.listen(port, () => {
-    console.log('Server is listening on port 3000');
+    console.log(`Server is listening: http://localhost:${port}`);
 });
