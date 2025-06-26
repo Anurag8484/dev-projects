@@ -13,7 +13,7 @@ export function Header(){
                     <p>News</p>
                 </div>
                 <div className="header-right">
-                    <button>Contact us!</button>                    
+                    <button className="header-button1">Contact us!</button>                    
                 </div>
             </header>
 
