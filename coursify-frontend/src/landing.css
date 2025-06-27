@@ -11,7 +11,10 @@
     padding: 10px 40px 20px 40px;
     border-radius: 10px;
     gap:20px;    
+    width: 300px;
     background-color: #edf2fa48;
+    justify-content: start;
+    align-items: center ;
 
 }
 
@@ -53,9 +56,9 @@
     gap: 1px;
 }
 
-.inputField small {
+small  {
     color: red;
-    font-size: 0.75rem;
+    font-size: 0.70rem;
     margin-top: 0.2rem;
   }
   

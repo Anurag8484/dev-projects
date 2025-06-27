@@ -2,15 +2,17 @@
 import { Route, BrowserRouter, Routes, useNavigate } from "react-router-dom";
 import { Layout } from "./components/Layout";
 import { Landing } from "./components/Landing";
-import { Home } from "./components/Home";
+import { AdminHome } from "./components/AdminHome";
+import { UserHome } from "./components/UserHome";
 
 export default function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Landing />} />
-          <Route path="/home" element={<Home />} />
+          <Route path="/" element={<Landing />} />
+          <Route path="/user/home" element={<UserHome />} />
+          <Route path="/admin/home" element={<AdminHome />} />
         </Route>
       </Routes>
     </BrowserRouter>

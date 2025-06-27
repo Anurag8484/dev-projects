@@ -5,9 +5,15 @@ import { validation } from "../utils/validation";
 import "../landing.css";
 export function Landing() {
   const [switchCard, setSwitchCard] = useState(true);
-  const [user, setUser] = useState({ name: "", email: "", password: "" });
+  const [user, setUser] = useState({
+    name: "",
+    email: "",
+    password: "",
+    role: "",
+  });
   const [errors, setErrors] = useState({ name: "", email: "", password: "" });
-  const [validCred, setValidCred] = useState(true);
+  const [backendError, setBackendError] = useState("");
+  const [admin, setAdmin] = useState(false);
   const navigate = useNavigate();
 
   function HandleInputChange(event) {
@@ -19,27 +25,88 @@ export function Landing() {
 
     let errosCopy = { ...errors };
     const errorR = validation(name, value, errosCopy);
-    console.log(errorR)
+    console.log(errorR);
     setErrors(errorR);
   }
 
   async function Signup() {
-    try {
-      const res = await axios.post("http://localhost:3001/users/signup", {
-        name: user.name,
-        email: user.email,
-        password: user.password,
-      });
-      if (res.status) {
-        setUser({name:'',password:'',email:''})
-        navigate("/home");
-      } else {
+    if (!user.email || !user.password || !user.name) {
+      setBackendError("Please fill out all the fields");
+    } else {
+      try {
+        let res
+        if (!admin) {
+         res = await axios.post("http://localhost:3001/users/signup", {
+            name: user.name,
+            email: user.email,
+            password: user.password,
+          });
+        } else {
+           res = await axios.post("http://localhost:3001/admin/signup", {
+            name: user.name,
+            email: user.email,
+            password: user.password,
+          });
+        }
+        if (res.status) {
+            alert("User registered Successfully")
+          setUser({ name: "", password: "", email: "" });
+          
+        } else {
+          console.error("Error adding in Db");
+        }
+      } catch (error) {
+        setBackendError(
+          error.response?.data?.message || error.message || "Unknown error"
+        );
+        console.error(error);
       }
-    } catch (error) {
-        console.error(error)
     }
   }
-  async function Signin() {}
+  async function Signin() {
+    if (!user.email || !user.password) {
+      setBackendError("Please fill out all the fields");
+    } else {
+        try {
+            let res;
+      if (!admin) {
+         res = await axios.post(
+          "http://localhost:3001/users/login",
+          {},
+          {
+            headers: {
+              email: user.email,
+              password: user.password,
+            },
+          }
+        );
+      } else {
+        res = await axios.post(
+          "http://localhost:3001/admin/login",
+          {
+              email: user.email,
+              password: user.password,
+          }
+        );
+      }
+        if (res.status) {
+          setUser({ name: "", password: "", email: "" });
+          if (!admin) {
+            navigate("/user/home");
+          } else {
+            navigate("/admin/home");
+          }
+        } else {
+          navigate("/");
+        }
+      } catch (error) {
+        setBackendError(
+          error.response?.data?.message || error.message || "Unknown error"
+        );
+        console.error(error);
+      }
+    }
+  }
 
   if (switchCard) {
     return (
@@ -58,6 +125,7 @@ export function Landing() {
                     name="name"
                     placeholder="Name"
                     onChange={HandleInputChange}
+                    required
                   />
                   <small>{errors.name}</small>
                 </div>
@@ -67,6 +135,7 @@ export function Landing() {
                   placeholder="Email"
                   name="email"
                   onChange={HandleInputChange}
+                  required
                 />
                 <small>{errors.email}</small>
                 <p>Password</p>
@@ -75,21 +144,23 @@ export function Landing() {
                   name="password"
                   placeholder="Password"
                   onChange={HandleInputChange}
-                  />
-                  <small>{errors.password}</small>
+                />
+                <small>{errors.password}</small>
               </div>
               <div className="card-footer">
-                <button onClick={Signup}>SignUp</button>
+                <button onClick={Signup} type="submit">
+                  SignUp
+                </button>
                 <p>
-                  Already Registered!{" "}
+                  Already Registered!
                   <span onClick={() => setSwitchCard(false)}>Login</span>
                 </p>
+                <p>
+                  Instructor ?
+                  <span onClick={() => setAdmin(true)}> SignUp</span>
+                </p>
 
-                {!validCred ? (
-                  <div className="errorDiv">Invalid Credentials</div>
-                ) : (
-                  ""
-                )}
+                <div className="errorDiv">{backendError}</div>
               </div>
             </div>
           </div>
@@ -126,15 +197,15 @@ export function Landing() {
               <div className="card-footer">
                 <button onClick={Signin}>SignIn</button>
                 <p>
-                  New User!{" "}
+                  New User!
                   <span onClick={() => setSwitchCard(true)}>Register</span>
                 </p>
+                <p>
+                  Instructor ?
+                  <span onClick={() => setAdmin(true)}> SignIp</span>
+                </p>
 
-                {!validCred ? (
-                  <div className="errorDiv">Invalid Credentials</div>
-                ) : (
-                  ""
-                )}
+                <div className="errorDiv">{backendError}</div>
               </div>
             </div>
           </div>
