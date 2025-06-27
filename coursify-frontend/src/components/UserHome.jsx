@@ -1,7 +1,11 @@
 export function UserHome(){
     return(
         <>
-        User Home
+        <h2>User Home</h2>
+        <div>Courses</div>
+        <div className="courses list">
+            
+        </div>
         </>
     )
 }

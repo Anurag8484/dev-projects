@@ -69,15 +69,15 @@ export function Landing() {
     } else {
         try {
             let res;
+            console.log(admin)
       if (!admin) {
          res = await axios.post(
           "http://localhost:3001/users/login",
-          {},
           {
-            headers: {
+  
               email: user.email,
               password: user.password,
-            },
+
           }
         );
       } else {
@@ -91,6 +91,7 @@ export function Landing() {
       }
         if (res.status) {
           setUser({ name: "", password: "", email: "" });
+          localStorage.setItem("token",res.data.token);
           if (!admin) {
             navigate("/user/home");
           } else {
@@ -114,7 +115,7 @@ export function Landing() {
         <section className="hero">
           <div className="card-container">
             <div className="card-header">
-              <h4>SignUp</h4>
+              {(admin) ? <h4>Admin SignUp</h4> : <h4>User Signup</h4>}
             </div>
             <div className="card-content">
               <div className="formField">
@@ -155,10 +156,17 @@ export function Landing() {
                   Already Registered!
                   <span onClick={() => setSwitchCard(false)}>Login</span>
                 </p>
-                <p>
-                  Instructor ?
-                  <span onClick={() => setAdmin(true)}> SignUp</span>
-                </p>
+                {admin ? (
+                  <p>
+                    User ?
+                    <span onClick={() => setAdmin(false)}> SignUp</span>
+                  </p>
+                ) : (
+                  <p>
+                    Instructor ?
+                    <span onClick={() => setAdmin(true)}> SignUp</span>
+                  </p>
+                )}
 
                 <div className="errorDiv">{backendError}</div>
               </div>
@@ -173,7 +181,7 @@ export function Landing() {
         <section className="hero">
           <div className="card-container">
             <div className="card-header">
-              <h4>SignIn</h4>
+              {admin ? <h4>Admin SignIn</h4> : <h4>User SignIn</h4>}
             </div>
             <div className="card-content">
               <div className="formField">
@@ -200,10 +208,16 @@ export function Landing() {
                   New User!
                   <span onClick={() => setSwitchCard(true)}>Register</span>
                 </p>
-                <p>
-                  Instructor ?
-                  <span onClick={() => setAdmin(true)}> SignIp</span>
-                </p>
+                {admin ? (
+                  <p>
+                    User ?<span onClick={() => setAdmin(false)}> SignIn</span>
+                  </p>
+                ) : (
+                  <p>
+                    Instructor ?
+                    <span onClick={() => setAdmin(true)}> SignIn</span>
+                  </p>
+                )}
 
                 <div className="errorDiv">{backendError}</div>
               </div>
