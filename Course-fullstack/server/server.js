@@ -123,8 +123,9 @@ app.post('/admin/login', async (req, res) => {
     // logic to log in admin
 
     const email = req.body.email;
+    console.log(email)
     const password  = req.body.password;
-    const name = req.body.name;
+    console.log(password)
 
     let admin;
     let passwordMatch;
@@ -134,7 +135,7 @@ app.post('/admin/login', async (req, res) => {
             email: email
         });
 
-        passwordMatch =  bcrypt.compare(password,admin.password);
+        passwordMatch =  await bcrypt.compare(password,admin.password);
     }catch (error){
         console.error(`Error finding in DB: ${error}`);
     }
@@ -256,7 +257,7 @@ app.post('/users/signup', async(req, res) => {
     console.log(req.body)
 
     if (!safeParse.success){
-        return res.status(40).json({
+        return res.status(404).json({
             error: safeParse.error.issues[0].message
         });
     }
@@ -291,10 +292,8 @@ app.post('/users/signup', async(req, res) => {
 
 app.post('/users/login', async(req, res) => {
   // logic to log in user
-  const email = req.headers.email;
-  console.log(email)
-  const password = req.headers.password;
-  console.log(password)
+  const email = req.body.email;
+  const password = req.body.password;
 
   let user;
   let passwordMatch;
@@ -304,15 +303,19 @@ app.post('/users/login', async(req, res) => {
     user = await User.findOne({
       email: email,
     });
+    if (user){
+        passwordMatch = await bcrypt.compare(password, user.password);
 
-    passwordMatch = bcrypt.compare(password, user.password);
+    }else{
+        throw new Error();
+    }
+
   } catch (error) {
-    res.json({
+    res.status(404).json({
       error: `Error finding User in the DB: ${error}`,
     });
     return;
   }
-
   if (passwordMatch) {
     const token = jwt.sign(
       {
@@ -336,9 +339,12 @@ app.post('/users/login', async(req, res) => {
 app.get('/users/courses',userAuth, async(req, res) => {
     // logic to list all courses
     try {
-      const courses = await Course.find();
+      const courses = await Course.find({
+        published: true
+      });
+
       if (courses.length == 0) {
-        res.json({
+        res.status(404).json({
           message: "At present, there are 0 courses.",
         });
         return;
