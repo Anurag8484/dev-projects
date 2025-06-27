@@ -26,8 +26,7 @@ export function UserHome(){
             }
           );
           if (res.status) {
-            console.log(res);
-            
+            setLoading(true)            
             fetchCourses();
           } else {
             setError("Currently there are 0 courses.");
