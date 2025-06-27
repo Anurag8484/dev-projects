@@ -1,6 +1,7 @@
 .pageTitle{
 display: flex;
-justify-content: center;
+justify-content: space-between;
+align-items: center;
 }
 
 
@@ -33,7 +34,7 @@ justify-content: center;
     gap: 20px;
 }
 
-.cardFooter button{
+button{
     color: white;
     background-color: black;
     font-weight: 600;
@@ -44,7 +45,12 @@ justify-content: center;
     transition: 0.3s;
 }
 
-.cardFooter button:hover{
+button:hover{
     background-color: rgb(79, 78, 78);
     transform: scale(1.1) ;
+}
+
+.coursePurchase{
+    color: green;
+    font-weight: 600;
 }
