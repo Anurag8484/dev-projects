@@ -19,7 +19,7 @@ export function Hero() {
           </span>
         </div>
       </div>
-      <div className="flex   my-25">
+      <div className="flex   mt-25">
         <div className=" flex flex-col gap-10 w-160   ">
           <span className="text-[60px] font-bold leading-15">
             A Simple Bookmark Manager
