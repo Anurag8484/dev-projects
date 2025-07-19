@@ -19,6 +19,36 @@ export function Hero() {
           </span>
         </div>
       </div>
+      <div className="flex   my-25">
+        <div className=" flex flex-col gap-10 w-160   ">
+          <span className="text-[60px] font-bold leading-15">
+            A Simple Bookmark Manager
+          </span>
+          <span className="text-2xl text-[#9CA3AF] w-120 ">
+            A clean and simple interface to organize your favourite websites.
+            Open a new browser tab and see your sites load instantly. Try it for
+            free.
+          </span>
+          <div className="flex gap-5">
+            <span className="bg-[#5368DF] text-white font-bold py-4 rounded-md px-3 hover:bg-white hover:shadow-lg hover:text-[#5368DF] border-2 border-[#5368DF] cursor-pointer">
+              Get It On Chrome
+            </span>
+            <span className="bg-[#D1D5DB] text-black font-bold py-4 rounded-md px-3 hover:text-[#4B5563] hover:bg-white hover:shadow-lg  border-2 border-[#D1D5DB] cursor-pointer">
+              Get It On Firefox
+            </span>
+          </div>
+        </div>
+        <div className="relative min-w-160">
+          <div className="bg-[#5368DF] absolute top-15 right-0 translate-x-47 translate-y-30 h-75 w-141 rounded-bl-[150px] rounded-tl-[150px]"></div>
+          <div className="">
+            <img
+              src="https://tailwindfromscratch.com/website-projects/bookmark/images/illustration-hero.svg"
+              alt=""
+              className="z-920 relative w-160 translate-x-8 -translate-y-10"
+            />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
