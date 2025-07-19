@@ -10,8 +10,8 @@ export function Download() {
         </span>
         <span>you've got a favourite you'd like us to prioritize.</span>
       </div>
-      <div className="flex justify-center  gap-8">
-        <div className=" rounded-xl shadow-lg min-h-80 min-w-80 ">
+      <div className="flex justify-center  gap-8 0">
+        <div className=" rounded-xl shadow-lg min-h-80 min-w-80 duration-30 ">
           <div className="flex gap-5 flex-col items-center  py-10 border-b-6  border-[#DBDFF5] border-dotted">
             <img
               src="https://tailwindfromscratch.com/website-projects/bookmark/images/logo-chrome.svg"
@@ -22,12 +22,12 @@ export function Download() {
             <span className="text-sm">Minimum Version 62</span>
           </div>
           <div className=" py-4 flex justify-center ">
-            <div className=" flex  bg-[#5368DF] px-7 hover:bg-white hover:text-[#5368DF] hover:border-[#5368DF] border-2 cursor-pointer text-white rounded-md  py-3 justify-center">
+            <div className=" duration-300 flex  bg-[#5368DF] px-7 hover:bg-white hover:text-[#5368DF] hover:border-[#5368DF] border-2 cursor-pointer text-white rounded-md  py-3 justify-center">
               Add & Install Extension
             </div>
           </div>
         </div>
-        <div className=" rounded-xl shadow-lg min-h-80 min-w-80 translate-y-6">
+        <div className=" rounded-xl shadow-lg min-h-80 min-w-80 translate-y-6 duration-30">
           <div className="flex gap-5 flex-col items-center  py-10 border-b-6  border-[#DBDFF5] border-dotted">
             <img
               src="https://tailwindfromscratch.com/website-projects/bookmark/images/logo-firefox.svg"
@@ -38,12 +38,12 @@ export function Download() {
             <span className="text-sm">Minimum Version 55</span>
           </div>
           <div className=" py-4 flex justify-center ">
-            <div className=" flex  bg-[#5368DF] px-7 hover:bg-white hover:text-[#5368DF] hover:border-[#5368DF] border-2 cursor-pointer text-white rounded-md  py-3 justify-center">
+            <div className=" duration-300 flex  bg-[#5368DF] px-7 hover:bg-white hover:text-[#5368DF] hover:border-[#5368DF] border-2 cursor-pointer text-white rounded-md  py-3 justify-center">
               Add & Install Extension
             </div>
           </div>
         </div>
-        <div className=" rounded-xl shadow-lg min-h-80 min-w-80 translate-y-12 ">
+        <div className=" rounded-xl shadow-lg min-h-80 min-w-80 translate-y-12  ">
           <div className="flex gap-5 flex-col items-center  py-10 border-b-6  border-[#DBDFF5] border-dotted">
             <img
               src="https://tailwindfromscratch.com/website-projects/bookmark/images/logo-opera.svg"
@@ -54,7 +54,7 @@ export function Download() {
             <span className="text-sm">Minimum Version 46</span>
           </div>
           <div className=" py-4 flex justify-center ">
-            <div className=" flex  bg-[#5368DF] px-7 hover:bg-white hover:text-[#5368DF] hover:border-[#5368DF] border-2 cursor-pointer text-white rounded-md  py-3 justify-center">
+            <div className=" duration-300 flex  bg-[#5368DF] px-7 hover:bg-white hover:text-[#5368DF] hover:border-[#5368DF] border-2 cursor-pointer text-white rounded-md  py-3 justify-center">
               Add & Install Extension
             </div>
           </div>
