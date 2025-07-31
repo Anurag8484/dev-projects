@@ -1,4 +1,4 @@
-type Variants = "primary" |  "secondary"
+type Variants = "primary" |  "secondary" 
 
 
 interface ButtonProps {
@@ -10,12 +10,15 @@ interface ButtonProps {
     onClick: ()=>void;
 }
 
-const variantStyles = {
 
-    "primary": "bg-purple-600 text-white",
-    "secondary": "bg-purple-400 text-purple-600",
+const variantStyles: Record<Variants,string> = {
+
+    primary: "bg-purple-600 text-white",
+    secondary: "bg-purple-400 text-purple-600",
 
 }
+
+
 const sizeStyles = {
     "sm": "p-2",
     "md": "p-4",
