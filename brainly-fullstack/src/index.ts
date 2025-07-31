@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import dotenv from 'dotenv';
 import { userRouter } from './routes/user';
 import { contentRouter } from './routes/content';
+import { brainRouter } from './routes/brain';
 
 dotenv.config();
 
@@ -26,8 +27,9 @@ app.use(express.json());
 
 
 
-app.use("/api/v1/user", userRouter)
-app.use("/api/v1/content", contentRouter)
+app.use("/api/v1/user", userRouter);
+app.use("/api/v1/content", contentRouter);
+app.use("/api/v1/brain", brainRouter);
 
 function main(): void{
     connectDB();

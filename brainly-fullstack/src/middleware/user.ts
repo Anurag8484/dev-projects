@@ -26,7 +26,7 @@ let userMiddleware = (req: AuthRequest, res: Response, next: NextFunction) => {
     next();
   } catch (error) {
     return res.status(500).json({
-      message: "Internal Server Error Kya haal",
+      message: "Internal Server Error ssss",
     });
   }
 };
