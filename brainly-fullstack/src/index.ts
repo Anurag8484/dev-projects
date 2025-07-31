@@ -2,6 +2,7 @@
 import express, { Express } from 'express';
 import mongoose from "mongoose";
 import dotenv from 'dotenv';
+import { userRouter } from './routes/user';
 
 dotenv.config();
 
@@ -23,10 +24,12 @@ app.use(express.json());
 
 
 
+app.use("/api/v1/user", userRouter)
+
 function main(): void{
     connectDB();
     app.listen(port)
-    console.log(`listening on the port ${port}`);
+    console.log(`listening on  http://localhost:${port}`);
 }
 
 main();

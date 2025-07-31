@@ -38,9 +38,9 @@ const tagModel = mongoose.model("Tag",tagSchema);
 const linkModel = mongoose.model("Link", linkSchema);
 
 
-module.exports({
+export {
     userModel,
     contentModel,
     tagModel,
     linkModel
-})
+}
