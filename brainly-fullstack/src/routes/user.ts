@@ -47,7 +47,44 @@ userRouter.post('/signup', async (req: Request,res: Response)=>{
 });
 
 
-userRouter.post('/signin')
+userRouter.post('/signin', async (req:Request,res:Response)=>{
+
+    const {username,password} = req.body;
+
+    let user;
+    let passwordMatch;
+
+    try {
+        user = await userModel.findOne({
+            username:username
+        });
+        if(!user){
+            return res.status(403).json({
+                message:"Incorrect Username"
+            });
+        }
+        passwordMatch = await bcrypt.compare(password,user.password);
+        if (passwordMatch){
+            const token = jwt.sign({
+                token: user._id.toString()
+            },secret as string, {expiresIn: '1h'});
+            return res.status(200).json({
+                token:token
+            })
+        }else{
+            return res.status(403).json({
+                message:"Incorrect Password"
+            })
+        }
+    } catch (error) {
+        return res.status(500).json({
+            message:'Internal Server Error'
+        });
+    }
+    
+
+
+})
 
 
 export{

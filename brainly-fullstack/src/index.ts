@@ -3,6 +3,7 @@ import express, { Express } from 'express';
 import mongoose from "mongoose";
 import dotenv from 'dotenv';
 import { userRouter } from './routes/user';
+import { contentRouter } from './routes/content';
 
 dotenv.config();
 
@@ -24,7 +25,9 @@ app.use(express.json());
 
 
 
+
 app.use("/api/v1/user", userRouter)
+app.use("/api/v1/content", contentRouter)
 
 function main(): void{
     connectDB();
