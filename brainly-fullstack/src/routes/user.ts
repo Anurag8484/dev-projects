@@ -12,8 +12,6 @@ const secret = process.env.JWT_SECRET;
 
 
 userRouter.post('/signup', async (req: Request,res: Response)=>{
-    console.log("Signup route hit");
-
     const reqBody  = z.object({
         username: z.string().min(3).max(10),
         password: z.string().min(8,"Password should have atleast 8 length").max(20).regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])/,"Password must include uppercase, lowercase, number, and special character")

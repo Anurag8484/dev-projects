@@ -11,8 +11,6 @@ brainRouter.post("/share", userMiddleware,async (req: AuthRequest, res: Response
       const user = await userModel.findOne({
         _id: req.userId,
       });
-      console.log(user);
-      
       if (user) {
         const hash: string = user.username;
         await linkModel.create({
