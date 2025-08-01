@@ -22,12 +22,12 @@ const variantStyles: Record<Variants,string> = {
 
 
 const sizeStyles = {
-    "sm": "py-1.5 px-3",
-    "md": "py-1.5 px-4",
+    "sm": "py-2 px-3",
+    "md": "py-2 px-4",
     "lg": "py-1  px-4"
 }
 
-const defaultStyles = "rounded-md flex gap-2 flex-row  m-4 items-center cursor-pointer duration-300 hover:scale-110  "
+const defaultStyles = "rounded-md flex gap-2 flex-row items-center cursor-pointer duration-300 hover:scale-110  "
 
 export const Button = (props: ButtonProps) =>{
     return <button className={` ${variantStyles[props.variant]} ${defaultStyles} ${sizeStyles[props.size]} `}> {props.startIcon} {props.text} {props.endIcon} </button>

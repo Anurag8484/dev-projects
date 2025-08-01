@@ -4,19 +4,11 @@ import { FiShare2 } from "react-icons/fi";
 
 export const Topbar = () => {
   return (
-    <section>
-      <div className=" flex items-center m-6 justify-between">
+      <div className="flex flex-col md:flex-row justify-start gap-5 items-center md:justify-between md:items-start  w-screen  m-6">
         <h1 className="font-bold text-2xl">
           All Notes
         </h1>
-        <div className="flex">
-          <Button
-            onClick={() => {}}
-            startIcon={<FaPlus className="" />}
-            variant="secondary"
-            text="Add Content"
-            size="md"
-          />
+        <div className="flex gap-6">
           <Button
             onClick={() => {}}
             startIcon={<FiShare2 className="size-5" />}
@@ -24,9 +16,15 @@ export const Topbar = () => {
             text="Share Brain"
             size="sm"
           />
+          <Button
+            onClick={() => {}}
+            startIcon={<FaPlus className="" />}
+            variant="secondary"
+            text="Add Content"
+            size="md"
+          />
         </div>
       </div>
-    </section>
   );
 };
 

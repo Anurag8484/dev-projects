@@ -1,9 +1,15 @@
+import { Sidebar } from "./components/Sidebar";
 import { Topbar } from "./components/Topbar";
 
 const App = () => {
   return (
     <>
-     <Topbar />
+      <section className="bg-[#f9fbfc]">
+        <div className="flex">
+          <Sidebar />
+          <Topbar />
+        </div>
+      </section>
     </>
   );
 };
