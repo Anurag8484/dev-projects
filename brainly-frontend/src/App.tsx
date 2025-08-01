@@ -1,5 +1,5 @@
 import { Sidebar } from "./components/Sidebar";
-import { Topbar } from "./components/Topbar";
+import { Home } from "./components/Home";
 
 const App = () => {
   return (
@@ -7,7 +7,7 @@ const App = () => {
       <section className="bg-[#f9fbfc]">
         <div className="flex">
           <Sidebar />
-          <Topbar />
+          <Home />
         </div>
       </section>
     </>
