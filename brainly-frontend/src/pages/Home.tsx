@@ -1,9 +1,9 @@
-import { Button } from "./ui/Button";
-import { ShareIcon } from "./icons/ShareIcon";
-import { PlusIcon } from "./icons/PlusIcon";
-import { Card } from "./Card";
+import { Button } from "../components/ui/Button";
+import { ShareIcon } from "../components/icons/ShareIcon";
+import { PlusIcon } from "../components/icons/PlusIcon";
+import { Card } from "../components/Card";
 import { useState } from "react";
-import { ContentModal } from "./ContentModal";
+import { ContentModal } from "../components/ContentModal";
 
 export const Home = () => {
   const [modalOpen, setModalOpen] = useState(false);

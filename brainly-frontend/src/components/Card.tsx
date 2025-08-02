@@ -40,7 +40,7 @@ export function Card({ title, link, type }: CardProps) {
       )}
 
       {type === "twitter" && (
-        <div className="bg-white py-5 px-2 max-w-70 min-w-75 min-h-90 no-scrollbar max-h-100 outline-1 overflow-auto rounded-xl outline-[#E6E8EA]  shadow-md">
+        <div className="bg-white py-5 px-2 max-w-70 min-w-75 min-h-90 no-scrollbar max-h-90 outline-1 overflow-auto rounded-xl outline-[#E6E8EA]  shadow-md">
           <div className="flex justify-between">
             <div className="flex gap-2 font-[500] items-center">
               <FaXTwitter className="text-[#62686D]" />

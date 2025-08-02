@@ -1,13 +1,16 @@
 import { Sidebar } from "./components/Sidebar";
-import { Home } from "./components/Home";
+import { Auth } from "./pages/Auth";
+import { Home } from "./pages/Home";
 
 const App = () => {
   return (
     <>
+
       <section className="bg-[#f9fbfc]">
         <div className="flex">
-          <Sidebar />
-          <Home />
+          <Auth />
+          {/* <Sidebar /> */}
+          {/* <Home /> */}
         </div>
       </section>
     </>
