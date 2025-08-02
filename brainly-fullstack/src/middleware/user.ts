@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import jwt, { JwtPayload, Secret } from "jsonwebtoken";
 import dotenv from "dotenv";
-import { any } from "zod";
 
 dotenv.config();
 interface AuthRequest extends Request {
@@ -26,7 +25,7 @@ let userMiddleware = (req: AuthRequest, res: Response, next: NextFunction) => {
     next();
   } catch (error) {
     return res.status(500).json({
-      message: "Internal Server Errors",
+      message: `Internal Server Errors", ${error}`,
     });
   }
 };

@@ -6,14 +6,14 @@ const contentRouter: Router = Router();
 
 
 contentRouter.post('/add',userMiddleware, async (req:AuthRequest,res:Response)=>{
-    const { link, type, title, tags, userId} = req.body;
+    const { link, type, title, tags} = req.body;
 
     if (!link || !type || !title || !tags){
             return res.status(403).json({
                 message:'Please fill all the required fields.'
             });
     };
-
+    
     try {
 
         const tagIds = [];

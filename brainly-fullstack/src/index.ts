@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import { userRouter } from './routes/user';
 import { contentRouter } from './routes/content';
 import { brainRouter } from './routes/brain';
+import cors from 'cors'
 
 dotenv.config();
 
@@ -23,6 +24,7 @@ async function connectDB(): Promise<void>{
 
 const app: Express = express();
 app.use(express.json());
+app.use(cors());
 
 
 
