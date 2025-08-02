@@ -10,6 +10,7 @@ interface ButtonProps {
     startIcon?: ReactElement;
     endIcon?: ReactElement;
     onClick: ()=>void;
+    moreStyles?: string;
 }
 
 
@@ -27,9 +28,19 @@ const sizeStyles = {
     "lg": "py-1  px-4"
 }
 
-const defaultStyles = "rounded-md flex gap-2 flex-row items-center cursor-pointer duration-300 hover:scale-110  "
+const defaultStyles = "rounded-md flex gap-2 flex-row items-center cursor-pointer duration-300 hover:scale-110"
 
 export const Button = (props: ButtonProps) =>{
-    return <button className={` ${variantStyles[props.variant]} ${defaultStyles} ${sizeStyles[props.size]} `}> {props.startIcon} {props.text} {props.endIcon} </button>
+    return (
+      <button
+        onClick={props.onClick}
+        className={` ${variantStyles[props.variant]} ${defaultStyles} ${
+          sizeStyles[props.size]
+        } ${props.moreStyles}  `}
+      >
+        {" "}
+        {props.startIcon} {props.text} {props.endIcon}{" "}
+      </button>
+    );
 }
 

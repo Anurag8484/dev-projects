@@ -10,7 +10,7 @@ return (
     stroke="currentColor"
     className={`${iconSizeVariants[props.size]} ${
       props?.color
-    } cursor-pointer hover:scale-110 duration-250 hover:text-red-500`}
+    } cursor-pointer hover:scale-110 duration-250 hover:text-red-500 `}
   >
     <path
       stroke-linecap="round"

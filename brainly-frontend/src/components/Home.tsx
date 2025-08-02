@@ -6,13 +6,13 @@ import { useState } from "react";
 import { ContentModal } from "./ContentModal";
 
 export const Home = () => {
-  const [modalOpen, setModalOpen] = useState(true);
+  const [modalOpen, setModalOpen] = useState(false);
 
   return (
-    <section className={`w-full `}>
+    <section className={`w-full duration-300 `}>
       <ContentModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
       <div className={` ${modalOpen ? "blur-sm" : ""}`}>
-        <div className="flex flex-col md:flex-row justify-start gap-2 items-center md:justify-between md:items-start      m-6">
+        <div className="flex flex-col md:flex-row justify-start gap-2 items-center md:justify-between md:items-start m-6">
           <h1 className="font-bold text-2xl">All Notes</h1>
           <div className="flex gap-6">
             <Button
@@ -23,7 +23,7 @@ export const Home = () => {
               size="sm"
             />
             <Button
-              onClick={() => {}}
+              onClick={() => setModalOpen(true)}
               startIcon={<PlusIcon size="lg" />}
               variant="secondary"
               text="Add Content"
