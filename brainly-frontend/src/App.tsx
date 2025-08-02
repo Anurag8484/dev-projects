@@ -1,19 +1,16 @@
-import { Sidebar } from "./components/Sidebar";
 import { Auth } from "./pages/Auth";
-import { Home } from "./pages/Home";
+import { Dashboard } from "./pages/Dashboard";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 const App = () => {
   return (
-    <>
-
-      <section className="bg-[#f9fbfc]">
-        <div className="flex">
-          <Auth />
-          {/* <Sidebar /> */}
-          {/* <Home /> */}
-        </div>
-      </section>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Auth />} />
+        <Route path="/home" element={<Dashboard />} />
+        <Route />
+      </Routes>
+    </BrowserRouter>
   );
 };
 

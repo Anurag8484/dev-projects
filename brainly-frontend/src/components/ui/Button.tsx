@@ -11,7 +11,8 @@ interface ButtonProps {
     endIcon?: ReactElement;
     onClick: ()=>void;
     moreStyles?: string;
-}
+    loading?: boolean;
+  }
 
 
 const variantStyles: Record<Variants,string> = {
@@ -34,7 +35,7 @@ export const Button = (props: ButtonProps) =>{
     return (
       <button
         onClick={props.onClick}
-        className={` ${variantStyles[props.variant]} ${defaultStyles} ${
+        className={` ${variantStyles[props.variant]} ${defaultStyles} ${props.loading? "opacity-40":""} ${
           sizeStyles[props.size]
         } ${props.moreStyles}  `}
       >
