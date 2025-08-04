@@ -33,8 +33,8 @@ brainRouter.post("/share", userMiddleware,async (req: AuthRequest, res: Response
   }
 });
 
-brainRouter.get('/shared/:shared_link',userMiddleware, async (req:AuthRequest, res:Response)=>{
-    const sharedLink: string = req.params.shared_link;
+brainRouter.get('/shared/:hash',userMiddleware, async (req:AuthRequest, res:Response)=>{
+    const sharedLink: string = req.params.hash;
 
     try {
         const sharedUser = await linkModel.findOne({

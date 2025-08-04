@@ -68,7 +68,6 @@ contentRouter.delete('/delete/:id',userMiddleware,async (req:AuthRequest,res:Res
     
     
     try {
-        console.log("1");
         
         const deleteRes = await contentModel.deleteOne({
             _id:contentId,
@@ -79,12 +78,10 @@ contentRouter.delete('/delete/:id',userMiddleware,async (req:AuthRequest,res:Res
                 message: 'Content not found'
             });
         };
-        console.log("2");
         return res.status(200).json({
             message: 'Content deleted'
         })
     } catch (error) {
-        console.log("3");
         return res.status(500).json({
             message: `${error}`
         })
