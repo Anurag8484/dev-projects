@@ -2,14 +2,43 @@ import { FaXTwitter, FaYoutube } from "react-icons/fa6";
 import { DeleteIcon } from "./icons/DeleteIcon";
 import { ShareIcon } from "./icons/ShareIcon";
 import copy from "copy-to-clipboard";
+import { useContent } from "../hooks/useContent";
+import axios from "axios";
+import { BACKEND_URL } from "../config";
+
 
 interface CardProps {
+  id: string;
   title: string;
   link: string;
   type: "twitter" | "youtube";
+  isShared?: boolean
 }
 
-export function Card({ title, link, type }: CardProps) {
+export function Card({ id, title, link, type, isShared }: CardProps) {
+
+  const {refresh} = useContent();
+
+  function deleteCard(id: string): void{
+    try {
+    axios.delete(`${BACKEND_URL}/api/v1/content/delete/${id}`,{
+      headers:{
+        'token': localStorage.getItem('token') 
+      }
+    }).then((response)=>{
+      if (response.status === 200){
+        alert("Content Deleted");
+        refresh();
+      }
+    })
+    } catch (error) {
+      console.error(error);
+      
+    }
+  }
+
+
+
   return (
     <div className="">
       {type === "youtube" && (
@@ -19,10 +48,12 @@ export function Card({ title, link, type }: CardProps) {
               <FaYoutube className="text-[#62686D]" />
               <span className="">{title}</span>
             </div>
-            <div className="flex gap-5  text-[#A1A4AC] ">
-              <ShareIcon size="sm" onClick={() => copy(link)} />
-              <DeleteIcon size="sm" />
-            </div>
+            {!isShared && (
+              <div className="flex gap-5  text-[#A1A4AC] ">
+                <ShareIcon size="sm" onClick={() => copy(link)} />
+                <DeleteIcon onClick={() => deleteCard(id)} size="sm" />
+              </div>
+            )}
           </div>
           <div className="flex my-3 justify-center ">
             <iframe
@@ -46,10 +77,12 @@ export function Card({ title, link, type }: CardProps) {
               <FaXTwitter className="text-[#62686D]" />
               <span className="">{title}</span>
             </div>
-            <div className="flex gap-5  text-[#A1A4AC]">
-              <ShareIcon size="sm" onClick={() => copy(link)} />
-              <DeleteIcon size="sm" />
-            </div>
+            {!isShared && (
+              <div className="flex gap-5  text-[#A1A4AC] ">
+                <ShareIcon size="sm" onClick={() => copy(link)} />
+                <DeleteIcon onClick={() => deleteCard(id)} size="sm" />
+              </div>
+            )}
           </div>
           <div className="flex justify-center">
             <blockquote className="twitter-tweet ">

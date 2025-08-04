@@ -5,6 +5,9 @@ import { Card } from "../components/Card";
 import { useEffect, useState } from "react";
 import { ContentModal } from "../components/ContentModal";
 import { useContent } from "../hooks/useContent";
+import axios from "axios";
+import { BACKEND_URL } from "../config";
+import copy from "copy-to-clipboard";
 
 export const Home = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -14,6 +17,28 @@ export const Home = () => {
     refresh();
   }, [modalOpen])
 
+  function shareBrain(){
+    console.log("c1");
+    
+    try {
+      axios.post(`${BACKEND_URL}/api/v1/brain/share`,{share: true},{
+        headers:{
+          'token': localStorage.getItem('token')
+        }
+      }).then((response)=>{
+        if (response.status===200){
+          copy(`http://localhost:5173/shared/${response.data.link}`)
+          alert(
+            `Link Copied to Clipboard:http://localhost:5173/api/v1/brain/shared/${response.data.link} `
+          );
+        }
+      })
+    } catch (error) {
+      console.error(error);
+      
+    }
+  }
+
   return (
     <section className={`w-full duration-300 `}>
       <ContentModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
@@ -22,7 +47,7 @@ export const Home = () => {
           <h1 className="font-bold text-2xl">All Notes</h1>
           <div className="flex gap-6">
             <Button
-              onClick={() => {}}
+              onClick={shareBrain}
               startIcon={<ShareIcon size="lg" />}
               variant="primary"
               text="Share Brain"
@@ -38,7 +63,7 @@ export const Home = () => {
           </div>
         </div>
         <div className="grid justify-center md:grid-cols-3 gap-10">
-          {contents.map(({type,title,link}, index)=> <Card key={index} type={type} link={link} title={title} />)}
+          {contents.map(({_id, type,title,link}, index)=> <Card key={index} id={_id} type={type} link={link} title={title} />)}
         </div>
       </div>
     </section>

@@ -11,6 +11,7 @@ return (
     className={`${iconSizeVariants[props.size]} ${
       props?.color
     } cursor-pointer hover:scale-110 duration-250 hover:text-red-500 `}
+    onClick={props.onClick}
   >
     <path
       stroke-linecap="round"
