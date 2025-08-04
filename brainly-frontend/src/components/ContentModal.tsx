@@ -16,6 +16,7 @@ export function ContentModal({ modalOpen, setModalOpen }: ContentModalProps) {
   const typeRef = useRef<HTMLSelectElement>(null);
 
   async function addContent() {
+
     const title = titleRef.current?.value;
     const link = linkRef.current?.value;
     const type = typeRef.current?.value;
@@ -42,6 +43,7 @@ export function ContentModal({ modalOpen, setModalOpen }: ContentModalProps) {
 
       if (res.status === 200){
         alert('Content Added')
+        setModalOpen(false)
         
       }
     } catch (error) {
@@ -71,7 +73,7 @@ export function ContentModal({ modalOpen, setModalOpen }: ContentModalProps) {
               <option className="" value="youtube">
                 Youtube
               </option>
-              <option value="youtube">Twitter</option>
+              <option value="twitter">Twitter</option>
             </select>
           </div>
           <div className=" flex gap-2   items-center">

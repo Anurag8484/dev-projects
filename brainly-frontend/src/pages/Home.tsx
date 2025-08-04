@@ -2,11 +2,17 @@ import { Button } from "../components/ui/Button";
 import { ShareIcon } from "../components/icons/ShareIcon";
 import { PlusIcon } from "../components/icons/PlusIcon";
 import { Card } from "../components/Card";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ContentModal } from "../components/ContentModal";
+import { useContent } from "../hooks/useContent";
 
 export const Home = () => {
   const [modalOpen, setModalOpen] = useState(false);
+  const {contents, refresh} = useContent();
+
+  useEffect(()=>{
+    refresh();
+  }, [modalOpen])
 
   return (
     <section className={`w-full duration-300 `}>
@@ -32,21 +38,7 @@ export const Home = () => {
           </div>
         </div>
         <div className="grid justify-center md:grid-cols-3 gap-10">
-          <Card
-            title="Today's thought"
-            type="twitter"
-            link="https://x.com/RadhaKeliKunj/status/1950537459428987039"
-          />
-          <Card
-            title="Today's thought"
-            type="twitter"
-            link="https://x.com/RadhaKeliKunj/status/1950537459428987039"
-          />
-          <Card
-            title="100xDevs Motivation"
-            type="youtube"
-            link="https://www.youtube.com/watch?v=w7PkMQyevUo&ab_channel=HarkiratSingh"
-          />
+          {contents.map(({type,title,link}, index)=> <Card key={index} type={type} link={link} title={title} />)}
         </div>
       </div>
     </section>
